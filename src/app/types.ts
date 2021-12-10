@@ -4,14 +4,24 @@ import {Store} from 'redux';
 
 export type ReducerHandler = (state: any, action: any) => any;
 
+
+
+export interface AppOptions {
+    onSuccess?: (action?: any, response?: any, history?: any) => any;
+    onFetchOption?: (option: any, reducer: ModelApi) => any;
+    onReducer?: ReducerHandler;
+    historyType?: any;
+}
+
+
 export interface ModelApi{
     key:string
-    subKeys?:Array<string>
+    subKeys?:Array<string>| string
     action?:string
     initialState?:any
     method?:string
     url?:(payload:any)=>string
-    single?:boolean
+    single?:boolean   
     headers?:object;
     bodyParser?:(payload:any)=>any;
     payload?:any
@@ -28,3 +38,10 @@ export interface AppApi {
     history?:History;
     store?:Store;
 }
+
+export type OnReducerApi = (
+    newState: any,
+    state: any,
+    action: any,
+    status: string
+  ) => any;
