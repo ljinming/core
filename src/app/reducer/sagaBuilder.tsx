@@ -1,4 +1,9 @@
 
+import {AppOptions, ModelApi, PutAction} from '../types';
+
+type CreateOptions = AppOptions & {
+    history: History;
+  };
 
 function sagaBuilder (models: Array<ModelApi | Array<ModelApi>>, args: any){
 
@@ -16,4 +21,11 @@ function sagaBuilder (models: Array<ModelApi | Array<ModelApi>>, args: any){
         }
     }
 
+}
+
+function createSaga (model: ModelApi, args: CreateOptions){
+    const {onFetchOption, onSuccess, history} = args;
+    return function *(){
+
+    }
 }
