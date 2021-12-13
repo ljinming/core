@@ -4,7 +4,17 @@ import {Store} from 'redux';
 
 export type ReducerHandler = (state: any, action: any) => any;
 
-
+export type PutAction = {
+    type: string;
+    payload: any;
+    loading?: boolean;
+    success?: boolean;
+    status?: number;
+    message?: string;
+    result?: {} | null;
+    url?: string;
+    error?: any;
+  };
 
 export interface AppOptions {
     onSuccess?: (action?: any, response?: any, history?: any) => any;
@@ -13,10 +23,14 @@ export interface AppOptions {
     historyType?: any;
 }
 
+export enum HistoryType {
+    HASH = 'HASH',
+    BROWSER = 'BROWSER',
+  }
 
 export interface ModelApi{
     key:string
-    subKeys?:Array<string>| string
+    subKeys?:Array<string>
     action?:string
     initialState?:any
     method?:string
