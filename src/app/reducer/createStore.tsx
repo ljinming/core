@@ -2,7 +2,7 @@ import { applyMiddleware,compose,createStore }  from 'redux';
 
 
 function createMprStore(opts:any) {
-    const {reducer,initialState,sagaMiddleware} = opts
+    const {reducers,initialState,sagaMiddleware} = opts
 
     let middleware =[];
     if(sagaMiddleware) {
@@ -17,7 +17,7 @@ function createMprStore(opts:any) {
 
     const enhancers = [applyMiddleware(...middleware),devTools]
 
-    return createStore(reducer, initialState, compose(...enhancers));
+    return createStore(reducers, initialState, compose(...enhancers));
 
 }
 export default createMprStore

@@ -37,6 +37,15 @@ function reducerBuilder (
         collectReducers(reducerGroups,reducer)
     })
 
+    /*
+    ast 的格式 抽象语法树结构
+        history:{
+            history.curve:reducer函数，
+            history.bond:reducer 函数
+        }
+
+    
+    */
     // reducerGroups ={}
 
         for(const [key, reducerGroup] of reducerGroups.entries()){
@@ -50,11 +59,13 @@ function reducerBuilder (
 
 
 /*
-        相当于数据格式整合为
-        home:{
-            home.List:reducer,
-            home.login:reducer
-        }
+    
+        group 的数据格式 map
+        reducer   {
+        key: 'history.curve',
+        method: 'post',
+        }, 
+        reducer.key: ()=>{} // reducer函数
     
     */
 function collectReducers(
@@ -109,7 +120,6 @@ function buildReducerGroup(reducerGroup:GroupType,onReducer?:OnReducerApi){
 
         // 使用key 作为action.type
         const action = reducer.key;
-
         // action 可能需异步处理，注入不同的状态处理函数
         handlers[action] = createReducerHandler(reducer,'reducer', (state,action) => {
             const {payload,...other} = action;
@@ -222,6 +232,7 @@ function createReducerHandler(
             state = result;
         } else {
             state = {...state};
+            console.log('---------s',state);
             buildState(state, reducer.subKeys as string[], result);
         }
         return state;
@@ -255,6 +266,8 @@ function buildState(
                 goNext = top[key];
               }
               top = goNext;
+        }else{
+            top[key] = subState;   
         }
     })
 }

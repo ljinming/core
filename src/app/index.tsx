@@ -44,6 +44,7 @@ class App implements AppApi{
         // 可以通过webpack注入全局的state
 
         const reducers = reducerBuilder(this.models,this.onReducer);
+        console.log('===',reducers)
         this.store = createStore({
             reducers,
             initialState,

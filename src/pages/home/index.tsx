@@ -1,4 +1,5 @@
 import {useEffect}  from 'react';
+import {connect} from 'react-redux';
 import Action from '@/action';
 
 interface ComponentProps {
@@ -24,14 +25,12 @@ function HomePage (){
     useEffect(() => {
     }, [])
 
-    // const setName = (value: string) => {
-    //     Action.emit('test.name', {
-    //       bondName: bondThree.bondName + value,
-    //     });
-    //   };
+    const setName = (value: string) => {
+        console.log('==========',value);
+      };
     
   
-    return <Component name={'111'} setName={'233'}></Component>
+    return <Component name={'111'} setName={setName}></Component>
 }
 
 function mapStateToProps(state: any) {
