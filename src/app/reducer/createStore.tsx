@@ -15,8 +15,9 @@ function createMprStore(opts:any) {
         devTools = (window as any).__REDUX_DEVTOOLS_EXTENSION__;
     }
 
-    const enhancers = [applyMiddleware(...middleware),devTools]
-
+     const enhancers = [applyMiddleware(...middleware),devTools()]
+    // const store = createStore(reducers, initialState, applyMiddleware(...middleware));
+    // console.log(store.getState())
     return createStore(reducers, initialState, compose(...enhancers));
 
 }

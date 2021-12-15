@@ -102,7 +102,7 @@ module.exports = function (webpackEnv) {
 
   const env = getClientEnvironment('');
 
-  const shouldUseReactRefresh = env.raw.FAST_REFRESH;
+  const shouldUseReactRefresh = env.raw.FAST_REFRESH; // dev false
 
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -146,6 +146,7 @@ module.exports = function (webpackEnv) {
         },
       },
     ].filter(Boolean);
+
     if (preProcessor) {
       loaders.push(
         {
@@ -316,14 +317,18 @@ module.exports = function (webpackEnv) {
         name: (entrypoint) => `runtime-${entrypoint.name}`,
       },
     },
+
     resolve: {
-      modules: ['node_modules', paths.appNodeModules],
+      // 告诉 webpack 解析模块时应该搜索的目录。使用绝对路径，将只在给定目录中搜索。 
+      modules: ['node_modules', paths.appNodeModules], 
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
       // some tools, although we do not recommend using it, see:
       // https://github.com/facebook/create-react-app/issues/290
       // `web` extension prefixes have been added for better support
       // for React Native Web.
+      
+      //自动解析确定的扩展
       extensions: paths.moduleFileExtensions
         .map((ext) => `.${ext}`)
         .filter((ext) => useTypeScript || !ext.includes('ts')),

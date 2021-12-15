@@ -6,7 +6,6 @@ class Action{
     public static dispatch:any;
  
     constructor(app: App) {
-        console.log('==========3',Action)
         Action.dispatch = app.store.dispatch;
       }
 

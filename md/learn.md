@@ -28,34 +28,46 @@ _-----------------webpack-------------_
 
 - postcss-loader css 的压缩解析器
 
-  - PostCSS 是一个使 CSS 更容易，更灵活，更快速工作的工具。PostCSS 不是 一个“真正的”预处理器。PostCSS 相当于一个 CSS 解析器，框架或 API，它允许我们使用可以完成各种任务的插件。 它本身没有任何插件，为了更改原始 CSS，我们必须添加至少一个插件。
+  - PostCSS 是一个使 CSS 更容易，更灵活，更快速工作的工具。PostCSS 不是 一个“真正的”预处理器。PostCSS 相当于一个 CSS 解析器，框架或 API，它允许我们使用可以完成各种任务的插件。 它本身没有任何插件，为了更改原始 CSS，我们必须添加至少一个插件。为了浏览器兼容
   - postcss-loader 用来对.css 文件进行处理，并添加在 style-loader 和 css-loader 之后。通过一个额外的 postcss 方法来返回所需要使用的 PostCSS 插件。
 
-    /_--------------------ts-------------_/
+* webpack 中对于输出文件名可以有三种 hash 值：
 
-    类型断言 as
-    implements
+- hash
+  即每次修改任何一个文件，所有文件名的 hash 至都将改变。所以一旦修改了任何一个文件，整个项目的文件缓存都将失效。
+- chunkhash
+  chunkhash 根据不同的入口文件(Entry)进行依赖文件解析、构建对应的 chunk，生成对应的哈希值。
+  因为我们是将样式作为模块 import 到 JavaScript 文件中的，所以它们的 chunkhash 是一致的，如 test1.js 和 test1.css：
+  这样就会有个问题，只要对应 css 或则 js 改变，与其关联的文件 hash 值也会改变，但其内容并没有改变呢，所以没有达到缓存意义。
 
-    type 和 interface
-    interface 可以 extends， 但 type 是不允许 extends 和 implement 的，但是 type 可以通过交叉类型 实现 interface 的 extend 行为，并且两者并不是相互独立的，也就是说 interface 可以 extends type, type 也可以 与 interface 类型 交叉
+- contenthash
+  contenthash 是针对文件内容级别的，只有你自己模块的内容变了，那么 hash 值才改变，所以我们可以通过 contenthash 解决上诉问题。
 
-    ```
-            interface Name {
-        name: string;
-        }
-        interface User extends Name {
-        age: number;
-        }
+  /_--------------------ts-------------_/
 
-        type 与 type 交叉
+  类型断言 as
+  implements
 
-        type Name = {
-        name: string;
-        }
-        type User = Name & { age: number };
-    ```
+  type 和 interface
+  interface 可以 extends， 但 type 是不允许 extends 和 implement 的，但是 type 可以通过交叉类型 实现 interface 的 extend 行为，并且两者并不是相互独立的，也就是说 interface 可以 extends type, type 也可以 与 interface 类型 交叉
 
-  /_-------------------redux-saga----------_/
+  ```
+          interface Name {
+      name: string;
+      }
+      interface User extends Name {
+      age: number;
+      }
+
+      type 与 type 交叉
+
+      type Name = {
+      name: string;
+      }
+      type User = Name & { age: number };
+  ```
+
+/_-------------------redux-saga----------_/
 
 action - > reduxMiddleWare -> store ;
 

@@ -9,6 +9,7 @@ process.on('unhandledRejection', (err) => {
 
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
+
 const {
   createCompiler,
   prepareUrls,
@@ -16,6 +17,9 @@ const {
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
+
+
+
 const createDevServerConfig = require('../config/webpackDevServer.config');
 
 // Tools like Cloud9 rely on this.
@@ -55,10 +59,11 @@ const serverConfig = createDevServerConfig(urls.lanUrlForConfig);
 const devServer = new WebpackDevServer(compiler, serverConfig);
 // Launch WebpackDevServer.
 devServer.listen(port, HOST, (err) => {
+
   if (err) {
     return console.log(err);
   }
-
+console.log('listen======3',urls.localUrlForBrowser)
   openBrowser(urls.localUrlForBrowser);
 });
 

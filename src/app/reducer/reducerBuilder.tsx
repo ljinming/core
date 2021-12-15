@@ -120,6 +120,7 @@ function buildReducerGroup(reducerGroup:GroupType,onReducer?:OnReducerApi){
 
         // 使用key 作为action.type
         const action = reducer.key;
+
         // action 可能需异步处理，注入不同的状态处理函数
         handlers[action] = createReducerHandler(reducer,'reducer', (state,action) => {
             const {payload,...other} = action;

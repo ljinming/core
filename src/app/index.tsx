@@ -42,9 +42,7 @@ class App implements AppApi{
         const sagaMiddleware = createSagaMiddleware();
         let initialState = {};
         // 可以通过webpack注入全局的state
-
         const reducers = reducerBuilder(this.models,this.onReducer);
-        console.log('===',reducers)
         this.store = createStore({
             reducers,
             initialState,
@@ -89,6 +87,7 @@ class App implements AppApi{
       };
 
     setRouter = (router: (app: App) => JSX.Element) => {
+        
         this.router = router;
       };
     
