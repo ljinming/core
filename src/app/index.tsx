@@ -18,7 +18,6 @@ class App implements AppApi{
     private onReducer?:OnReducerApi;
     private models:any[];
 
-
     constructor (opts:AppOptions) {
         const {historyType, onSuccess, onFetchOption, onReducer} = opts;
         this.history = createBrowserHistory();

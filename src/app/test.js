@@ -13,7 +13,6 @@ function c (value){
 
 
 function compose (...args) {
-    console.log('===3',args)
         return args.reduce((a,b)=>{
             return (...args)=>{
               return  a(b(...args));

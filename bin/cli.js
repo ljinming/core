@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const packageJson = require('../package.json');
-const {program} = require('commander');
+const { program } = require('commander');
 const path = require('path');
 const validateProjectName = require('validate-npm-package-name');
 const fs = require('fs-extra');

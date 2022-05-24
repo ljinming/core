@@ -1,17 +1,13 @@
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import App from '@/app';
- //import Home from '@/pages/home';
-import Login from '@/pages/login/index';
+import { Menu, Layout } from 'antd';
+import Routers from './Router';
+const { Header, Footer, Content } = Layout;
 
-function RouteApp(app: App) {
+export default () => {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path='/' exact component={Login} /> 
-        {/* <Route path='/' component={Home}></Route>  */}
-      </Switch>
-    </BrowserRouter>
+    <Layout>
+      <Header>Header</Header>
+      <Content></Content>
+      <Footer>Footer</Footer>
+    </Layout>
   );
-}
-
-export default RouteApp;
+};

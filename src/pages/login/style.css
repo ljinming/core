@@ -1,0 +1,18 @@
+.alert {
+  display: flex;
+  flex-direction: column;
+}
+.alert-icon {
+  border-radius: 12px;
+  width: 30px;
+  background: red;
+  text-align: center;
+}
+.alert-name {
+  margin-left: 20px;
+}
+
+.alert-top {
+  display: flex;
+  margin-left: 20px;
+}
