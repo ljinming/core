@@ -9,7 +9,7 @@ const fs = require('fs-extra');
 program
   .command(packageJson.name)
   .version(packageJson.version)
-  .arguments('<project-dir>')
+  //.arguments('<project-dir>')
   .action((name) => {
     projectName = name;
   })
@@ -20,17 +20,22 @@ if (typeof projectName === 'undefined') {
   process.exit(1);
 }
 
-const root = path.resolve(projectName);
+const root = path.resolve('core');
 const appName = path.basename(root);
 checkAppName(appName);
+
+console.log('===root', root)
+
 // fs.ensureDirSync(projectName);
 
 const sourcePath = path.resolve(__dirname, '../');
+console.log('===de',sourcePath)
 
 const files = fs
   .readdirSync(sourcePath)
   .filter((file) => !['bin', 'node_modules', 'package-lock.json', '.git'].includes(file));
 
+  console.log('===4 files',files)
 files.forEach((file) => {
   const sourceFile = path.resolve(sourcePath, file);
   const targetFile = path.resolve(root, file);
